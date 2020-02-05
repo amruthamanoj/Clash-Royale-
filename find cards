@@ -1,0 +1,26 @@
+key = "Generate your key from clashroyale api"
+
+import urllib.request
+import json
+
+url  = "https://api.clashroyale.com/v1/cards"
+#for cards 
+
+request = urllib.request.Request(
+url,
+    None,
+    {
+        "Authorization": "Bearer %s" % key
+    }
+)
+
+response = urllib.request.urlopen(request).read().decode('utf-8')
+info = json.loads(response)
+
+#view info to see the items
+
+for item in info['items']:
+    print("%s [%d]" % (item["name"], item["maxLevel"]))
+    
+
+  
