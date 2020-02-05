@@ -1,0 +1,28 @@
+key = "Generate your key from clashroyale api"
+
+import urllib.request
+import json
+
+url  = "endpoint = "/clans?minMembers=30"
+#for members >=30
+
+request = urllib.request.Request(
+url,
+    None,
+    {
+        "Authorization": "Bearer %s" % key
+    }
+)
+
+response = urllib.request.urlopen(request).read().decode('utf-8')
+info = json.loads(response)
+
+#view info to see the items
+
+# for say required trophies > 3000
+
+info = json.loads(response)
+for item in info['items'] :
+    if item['requiredTrophies'] > 3000:
+        
+        print("Clan: %s\nTrophies: %d\nMembers: %d\nScore: %s\nTag: %s\n\n" % (item["name"], item['requiredTrophies'],item["members"], item["clanScore"], item['tag']))
